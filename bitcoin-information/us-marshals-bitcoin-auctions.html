@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>US Marshals Bitcoin Auctions</title>
+	<link rel="stylesheet" href="./midnight/assets/css/style.css?v=b1d65216c39e1cb350e6309b09630d3befa1147c">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="./midnight/assets/js/respond.js"></script>
+    <script>
+    	function currencyFormat(num) {
+  			return '$' + num.toFixed().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+		}
+
+		// when the frame has loaded then call getData()
+		function addBitcoin() {
+		    var request = new XMLHttpRequest();
+		    request.open('GET', 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', true);
+
+		    request.onload = function() {
+		        if (request.status >= 200 && request.status < 400) {
+		            var data = JSON.parse(request.responseText);
+		            var price_usd = Number(data.bitcoin.usd);
+		            var total_btc = Number(document.getElementById("total_btc").innerText.replace(/,/g, ''));
+		            var usd_sales = Number(document.getElementById("usd_sales").innerText.replace(/,/g, ''));
+		            var total_usd = total_btc * price_usd;
+		            document.getElementById("total_usd").innerText = currencyFormat(total_usd);
+		            document.getElementById("gains_missed").innerText = currencyFormat(total_usd - usd_sales);
+		        }
+		    };
+
+		    request.send();
+		};
+	</script>
+  </head>
+  <body onload="addBitcoin()">
+    <h1 style="width:400px;margin:auto;padding-top:20px;padding-bottom:40px">US Marshals Bitcoin Auctions</h1>
+    <table class="compatibility" style="width:700px;margin:auto">
+	  <tr>
+	    <th>Auction Date</th>
+	    <th style="text-align:right">BTC Sold</th>
+	    <th style="text-align:right">USD Acquired</th>
+	    <th>News Article</th>
+	  </tr>
+	  <tr>
+	    <td>27-06-2014</td>
+	    <td style="text-align:right">29,657</td>
+	    <td style="text-align:right">$18,740,000</td>
+	    <td><a href="https://www.newsbtc.com/2019/01/13/tim-draper-18-million-first-bitcoin-batch/">Tim Draper Wins First Bitcoin Batch</a></td>
+	  </tr>
+	  <tr>
+	    <td>04-12-2014</td>
+	    <td style="text-align:right">50,000</td>
+	    <td style="text-align:right">$19,000,000</td>
+	    <td><a href="https://techcrunch.com/2014/12/05/us-marshals-complete-second-auction-of-silk-road-bitcoin/">US Marshals Complete Second Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>01-03-2015</td>
+	    <td style="text-align:right">50,000</td>
+	    <td style="text-align:right">$13,500,000</td>
+	    <td><a href="https://www.coindesk.com/us-marshals-auction-50000-bitcoins-march">US Marshals March Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>05-11-2015</td>
+	    <td style="text-align:right">44,341</td>
+	    <td style="text-align:right">$14,600,000</td>
+	    <td><a href="https://www.coindesk.com/us-government-to-sell-44000-btc-in-final-silk-road-auction">Final Silk Road Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>22-08-2016</td>
+	    <td style="text-align:right">2,719</td>
+	    <td style="text-align:right">$1,600,000</td>
+	    <td><a href="https://bravenewcoin.com/insights/us-marshals-announce-16-million-bitcoin-auction">US Marshals announce $1.6M Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>22-01-2018</td>
+	    <td style="text-align:right">3,813</td>
+	    <td style="text-align:right">$42,000,000</td>
+	    <td><a href="https://www.usmarshals.gov/assets/2018/bitcoinauction/index.html">US Marshals Announcement</a></td>
+	  </tr>
+	  <tr>
+	    <td>05-11-2018</td>
+	    <td style="text-align:right">660</td>
+	    <td style="text-align:right">$4,000,000</td>
+	    <td><a href="https://www.forbes.com/sites/rogeraitken/2018/10/19/u-s-marshals-set-to-auction-bitcoins-worth-4-2m-next-month/">US Marshals set to Auction bitcoins worth $4M</a></td>
+	  </tr>
+	  <tr>
+	    <td>01-02-2020</td>
+	    <td style="text-align:right">4,040</td>
+	    <td style="text-align:right">$38,000,000</td>
+	    <td><a href="https://www.usmarshals.gov/assets/2020/febbitcoinauction/">US Marshals Announcement</a></td>
+	  </tr>
+	  <tr>
+	    <td>03-17-2021</td>
+	    <td style="text-align:right">0.7501</td>
+	    <td style="text-align:right">$53,104</td>
+	    <td><a href="https://archive.is/nrchD">GSA Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>07-01-2021</td>
+	    <td style="text-align:right">500</td>
+	    <td style="text-align:right">$19,200,000</td>
+	    <td><a href="https://archive.is/pqs54">Ohio DOJ Auction</a></td>
+	  </tr>
+	  <tr>
+	    <td>TBD</td>
+	    <td style="text-align:right">69,370</td>
+	    <td style="text-align:right">TBD</td>
+	    <td><a href="https://www.coindesk.com/u-s-seized-more-than-1b-in-silk-road-linked-bitcoin-seeks-forfeiture-bloomberg">Seizure News</a></td>
+	  </tr>
+	</table>
+	<br/>
+	<p style="width:500px;margin:auto;font-size:20px">
+		Total BTC seized and sold: <span id="total_btc">185,230.7501</span><br/>
+		Total USD gained from sales: $<span id="usd_sales">151,493,104</span><br/>
+		Current USD value of all sold BTC: <span id="total_usd">???</span><br/>
+		Potential USD gains missed: <span id="gains_missed">???</span><br/>
+	</p>
+  </body>
+</html>
